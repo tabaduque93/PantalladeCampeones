@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="App3.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App3"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1080" Height="1920">
+    
+
+    <Grid>
+        
+        <MediaElement Name="Fondo"  Source="/Assets/Loop_Inicio.mp4" IsLooping="True" HorizontalAlignment="Center" Height="1920" Visibility="Visible" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="Fondo2" MediaEnded="Finvideo2" Source="/Assets/VerJugadores.mp4" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+
+
+        <Button Name="Button1" Content="Button" Margin="70,976,0,0" VerticalAlignment="Top" Height="82" Width="397" Click="IraVerJugadores" Opacity="0"/>
+        
+
+    </Grid>
+</Page>
+
+    
