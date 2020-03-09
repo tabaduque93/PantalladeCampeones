@@ -140,6 +140,8 @@
     <Content Include="Assets\Inicial_Teo.mp4" />
     <Content Include="Assets\LoopJugadores.mp4" />
     <Content Include="Assets\Loop_Inicio.mp4" />
+    <Content Include="Assets\TeoLoop.mp4" />
+    <Content Include="Assets\Teo_seleccion.mp4" />
     <Content Include="Assets\VerJugadores.mp4" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
