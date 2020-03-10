@@ -11,27 +11,35 @@
 
     <Grid>
 
-        <MediaElement Name="Fondo"  Source="/Assets/Loop_Inicio.mp4" IsLooping="True" HorizontalAlignment="Center" Height="1920" Visibility="Visible" VerticalAlignment="Center" Width="1080"/>
-        <MediaElement Name="Fondo2" Source="/Assets/VerJugadores.mp4" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="Fondo"  Source="/Assets/Loop_Inicial.mp4" IsLooping="True" HorizontalAlignment="Center" Height="1920" Visibility="Visible" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="Fondo2" Source="/Assets/VerJugadoresSombras.mp4" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="FondoTeo" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="FondoMiguel" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="FondoFredy" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="FondoMarlon" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="FondoSebastian" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="FondoDidier" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+        <MediaElement Name="FondoTodos" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
 
         <!--Botón Voy Pa' Esa-->
-        <Button Name="btnVoyPaEsa" Content="Button" Margin="70,976,0,0" VerticalAlignment="Top" Height="82" Width="397" Click="verJugadores" Background="Green" Opacity="0.5"/>
+        <Button Name="btnVoyPaEsa" Content="Button" Margin="70,976,0,0" VerticalAlignment="Top" Height="82" Width="397" Click="verJugadores" Background="Green" Opacity="0"/>
 
         <!--Botones jugadores-->
-        <Button Name="btnTeofilo" Content="Button" Margin="85,1010,0,0" VerticalAlignment="Top" Height="160" Width="290" Click="seleccionarJugador" Opacity="0.3" Background="Blue" Visibility="Collapsed"/>
-        <Button Name="btnFredy" Content="Button" Margin="70,1224,0,0" VerticalAlignment="Top" Height="160" Width="308" Click="seleccionarJugador" Opacity="0.3" Background="Blue" Visibility="Collapsed"/>
-        <Button Name="btnMiguel" Content="Button" Margin="-10,1005,0,0" VerticalAlignment="Top" Height="165" Width="285" Click="seleccionarJugador" Opacity="0.3" Background="Blue" HorizontalAlignment="Center" Visibility="Collapsed"/>
-        <Button Name="btnSebastian" Content="Button" Margin="-20,1225,0,0" VerticalAlignment="Top" Height="150" Width="295" Click="seleccionarJugador" Opacity="0.3" Background="Blue" HorizontalAlignment="Center" Visibility="Collapsed"/>
-        <Button Name="btnMarlon" Content="Button" Margin="702,1010,0,0" VerticalAlignment="Top" Height="160" Width="303" Click="seleccionarJugador" Opacity="0.3" Background="Blue" Visibility="Collapsed"/>
-        <Button Name="btnDidier" Content="Button" Margin="698,1225,0,0" VerticalAlignment="Top" Height="160" Width="261" Click="seleccionarJugador" Opacity="0.3" Background="Blue" Visibility="Collapsed"/>
+        <Button Name="btnTeofilo" Content="Button" Margin="85,1010,0,0" VerticalAlignment="Top" Height="160" Width="290" Click="seleccionarJugador" Opacity="0" Background="Blue" Visibility="Collapsed"/>
+        <Button Name="btnFredy" Content="Button" Margin="70,1224,0,0" VerticalAlignment="Top" Height="160" Width="308" Click="seleccionarJugador" Opacity="0" Background="Blue" Visibility="Collapsed"/>
+        <Button Name="btnMiguel" Content="Button" Margin="-10,1005,0,0" VerticalAlignment="Top" Height="165" Width="285" Click="seleccionarJugador" Opacity="0" Background="Blue" HorizontalAlignment="Center" Visibility="Collapsed"/>
+        <Button Name="btnSebastian" Content="Button" Margin="-20,1225,0,0" VerticalAlignment="Top" Height="150" Width="295" Click="seleccionarJugador" Opacity="0" Background="Blue" HorizontalAlignment="Center" Visibility="Collapsed"/>
+        <Button Name="btnMarlon" Content="Button" Margin="702,1010,0,0" VerticalAlignment="Top" Height="160" Width="303" Click="seleccionarJugador" Opacity="0" Background="Blue" Visibility="Collapsed"/>
+        <Button Name="btnDidier" Content="Button" Margin="698,1225,0,0" VerticalAlignment="Top" Height="160" Width="261" Click="seleccionarJugador" Opacity="0" Background="Blue" Visibility="Collapsed"/>
 
         <!--Botón Todos-->
-        <Button Name="btnTodos" Content="Button" Margin="544,1445,0,0" VerticalAlignment="Top" Height="108" Width="497" Click="seleccionarJugador" Opacity="0.3" Background="Blue" Visibility="Collapsed"/>
-        
+        <Button Name="btnTodos" Content="Button" Margin="544,1445,0,0" VerticalAlignment="Top" Height="108" Width="497" Click="seleccionarJugador" Opacity="0" Background="Blue" Visibility="Collapsed"/>
+
         <!--Botón Capturar-->
-        <Button Name="btnCapturar" Content="Button" Margin="336,869,0,0" VerticalAlignment="Top" Height="91" Width="457" Click="capturar" Opacity="0.3" Background="Orange" Visibility="Collapsed"/>
+        <Button Name="btnCapturar" Content="Button" Margin="336,869,0,0" VerticalAlignment="Top" Height="91" Width="457" Click="capturar" Opacity="0" Background="Orange" Visibility="Collapsed"/>
 
-
+        <!--Botón Individual-->
+        <Button Name="btnIndividual" Content="Button" Margin="54,1221,0,0" VerticalAlignment="Top" Height="451" Width="981" Click="verJugadores" Opacity="0" Background="DarkCyan" Visibility="Collapsed"/>
     </Grid>
 </Page>
 

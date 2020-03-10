@@ -8,8 +8,8 @@
 
   <Identity
     Name="9e44d609-57f4-47ef-8e9f-5d0b19eccf1e"
-    Publisher="CN=User"
-    Version="1.0.1.0" />
+    Publisher="CN=Sistra"
+    Version="1.0.2.0" />
 
   <mp:PhoneIdentity PhoneProductId="9e44d609-57f4-47ef-8e9f-5d0b19eccf1e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

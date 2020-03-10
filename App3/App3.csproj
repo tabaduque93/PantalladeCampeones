@@ -17,14 +17,16 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <PackageCertificateThumbprint>74243CDE1320E27E67D6EA3E12B2A4C2EA170BC2</PackageCertificateThumbprint>
+    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -137,12 +139,25 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Borja_Loop.mp4" />
+    <Content Include="Assets\Borja_Seleccion.mp4" />
+    <Content Include="Assets\Hinestroza_Loop.mp4" />
+    <Content Include="Assets\Hinestroza_Seleccion.mp4" />
     <Content Include="Assets\Inicial_Teo.mp4" />
-    <Content Include="Assets\LoopJugadores.mp4" />
-    <Content Include="Assets\Loop_Inicio.mp4" />
+    <Content Include="Assets\LoopGrupo.mp4" />
+    <Content Include="Assets\Loop_Inicial.mp4" />
+    <Content Include="Assets\Loop_VerJugadoresSombra.mp4" />
+    <Content Include="Assets\Moreno_Loop.mp4" />
+    <Content Include="Assets\Moreno_Seleccion.mp4" />
+    <Content Include="Assets\Piedrahita_Loop.mp4" />
+    <Content Include="Assets\Piedrahita_Seleccion.mp4" />
     <Content Include="Assets\TeoLoop.mp4" />
     <Content Include="Assets\Teo_seleccion.mp4" />
-    <Content Include="Assets\VerJugadores.mp4" />
+    <Content Include="Assets\VerJugadoresSombras.mp4" />
+    <Content Include="Assets\ver_Grupo.mp4" />
+    <Content Include="Assets\Viera_Loop.mp4" />
+    <Content Include="Assets\Viera_Seleccion.mp4" />
+    <Content Include="Assets\Volver_Individual.mp4" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -167,8 +182,18 @@
       <Version>6.2.9</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="App3_TemporaryKey.pfx" />
+    <None Include="Sistra.pfx" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>App3_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
