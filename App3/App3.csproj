@@ -25,7 +25,7 @@
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <PackageCertificateThumbprint>74243CDE1320E27E67D6EA3E12B2A4C2EA170BC2</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>0E22792B0F99EFA100B86FF5ED4D5BAD96D3B0B7</PackageCertificateThumbprint>
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -141,6 +141,13 @@
   <ItemGroup>
     <Content Include="Assets\Borja_Loop.mp4" />
     <Content Include="Assets\Borja_Seleccion.mp4" />
+    <Content Include="Assets\click.mp3" />
+    <Content Include="Assets\error.png" />
+    <Content Include="Assets\second.mp3" />
+    <Content Include="Assets\sent.mp3" />
+    <Content Include="Assets\shoot.mp3" />
+    <Content Include="Assets\success.png" />
+    <Content Include="Assets\teclado.png" />
     <Content Include="Assets\Hinestroza_Loop.mp4" />
     <Content Include="Assets\Hinestroza_Seleccion.mp4" />
     <Content Include="Assets\Inicial_Teo.mp4" />
@@ -151,7 +158,9 @@
     <Content Include="Assets\Moreno_Seleccion.mp4" />
     <Content Include="Assets\Piedrahita_Loop.mp4" />
     <Content Include="Assets\Piedrahita_Seleccion.mp4" />
+    <Content Include="Assets\sending.png" />
     <Content Include="Assets\TeoLoop.mp4" />
+    <Content Include="Assets\Teo_LoopLong.mp4" />
     <Content Include="Assets\Teo_seleccion.mp4" />
     <Content Include="Assets\VerJugadoresSombras.mp4" />
     <Content Include="Assets\ver_Grupo.mp4" />
@@ -184,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App3_TemporaryKey.pfx" />
+    <None Include="Sistra SAS.snk" />
     <None Include="Sistra.pfx" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
@@ -193,7 +203,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>App3_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Sistra SAS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

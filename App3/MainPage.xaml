@@ -7,9 +7,84 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1080" Height="1920">
+    <Page.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
+            <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+            <Setter Property="FocusVisualMargin" Value="-3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#255CBA"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FFFFFF"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#255CBA"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FFFFFF"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ContentPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
 
-    <Grid>
+    <Grid Name="gridPrincipal">
 
         <MediaElement Name="Fondo"  Source="/Assets/Loop_Inicial.mp4" IsLooping="True" HorizontalAlignment="Center" Height="1920" Visibility="Visible" VerticalAlignment="Center" Width="1080"/>
         <MediaElement Name="Fondo2" Source="/Assets/VerJugadoresSombras.mp4" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
@@ -20,6 +95,10 @@
         <MediaElement Name="FondoSebastian" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
         <MediaElement Name="FondoDidier" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
         <MediaElement Name="FondoTodos" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
+        <Image Name="ImgTeclado" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080" Source="/Assets/teclado.png"></Image>
+        <Image Name="ImgEnviandoEmail" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080" Source="/Assets/sending.png"></Image>
+        <Image Name="ImgErrorEmail" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080" Source="/Assets/error.png"></Image>
+        <Image Name="ImgEmailEnviado" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080" Source="/Assets/success.png"></Image>
 
         <!--Botón Voy Pa' Esa-->
         <Button Name="btnVoyPaEsa" Content="Button" Margin="70,976,0,0" VerticalAlignment="Top" Height="82" Width="397" Click="verJugadores" Background="Green" Opacity="0"/>
@@ -40,6 +119,59 @@
 
         <!--Botón Individual-->
         <Button Name="btnIndividual" Content="Button" Margin="54,1221,0,0" VerticalAlignment="Top" Height="451" Width="981" Click="verJugadores" Opacity="0" Background="DarkCyan" Visibility="Collapsed"/>
+
+        <!-- Grid teclado -->
+        <Grid Width="1080" Visibility="Collapsed" Height="1920" RequestedTheme="Light" FocusVisualPrimaryBrush="White" Margin="10,0,-10,0" Name="gridTeclado">
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn1" Content="1" Margin="82,1152,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="Btn1_Click" FontFamily="League Spartan" FontWeight="Bold" Foreground="White" CornerRadius="5,0,5,0" Background="#FFB21117" RequestedTheme="Dark" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn2"  Content="2" Margin="173,1152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="82" Click="Btn2_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn3" Content="3" Margin="261,1152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="Btn3_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn4" Content="4" Margin="351,1152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="Btn4_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn5" Content="5" Margin="440,1152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="Btn5_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn6" Content="6" Margin="530,1152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="Btn6_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn7" Content="7" Margin="619,1152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="Btn7_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn8" Content="8" Margin="709,1152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="Btn8_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn9" Content="9" Margin="798,1152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="82" Click="Btn9_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="Btn0" Content="0" Margin="888,1152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="Btn0_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnQ" Content="q" Margin="82,1219,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnQ_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnW" Content="w" Margin="173,1219,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="82" Click="BtnW_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnE" Content="e" Margin="261,1219,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnE_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnR" Content="r" Margin="351,1219,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnR_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnT" Content="t" Margin="440,1219,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnT_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnY" Content="y" Margin="530,1219,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnY_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnU" Content="u" Margin="619,1219,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnU_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnI" Content="i" Margin="709,1219,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnI_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnO" Content="o" Margin="798,1219,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="82" Click="BtnO_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnP" Content="p" Margin="888,1219,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnP_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnA" Content="a" Margin="82,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnA_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnS" Content="s" Margin="173,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="82" Click="BtnS_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnD" Content="d" Margin="261,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnD_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnF" Content="f" Margin="351,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnF_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnG" Content="g" Margin="440,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnG_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnH" Content="h" Margin="530,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnH_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnJ" Content="j" Margin="619,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnJ_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnK" Content="k" Margin="709,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnK_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnL" Content="l" Margin="798,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="82" Click="BtnL_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnÑ" Content="ñ" Margin="888,1283,0,0" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnÑ_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" VerticalAlignment="Top" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnZ" Content="z" Margin="82,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnZ_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnX" Content="x" Margin="173,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="82" Click="BtnX_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnC" Content="c" Margin="261,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnC_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnV" Content="v" Margin="351,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnV_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnB" Content="b" Margin="440,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnB_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnN" Content="n" Margin="530,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnN_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnM" Content="m" Margin="619,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnM_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnMiddle" Content="-" Margin="709,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnMiddle_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnDash" Content="_" Margin="798,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="82" Click="BtnDash_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnPeriod" Content="." Margin="888,1353,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="60" Width="83" Click="BtnPeriod_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="25"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnGmail" Content="@gmail.com" Margin="127,1419,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="61" Width="176" Click="BtnGmail_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="18"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnHotmail" Content="@hotmail.com" Margin="309,1419,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="61" Width="175" Click="BtnHotmail_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="18"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnCom" Content=".com" Margin="491,1419,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.048,-0.5" Height="61" Width="82" Click="BtnCom_Click" FontFamily="League Spartan" FontWeight="Bold" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="18"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnCo" Content=".co" Margin="581,1419,0,0" RenderTransformOrigin="-1.048,-0.5" Height="61" Width="83" Click="BtnCo_Click" FontFamily="League Spartan" FontWeight="Bold" VerticalAlignment="Top" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="18"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnAt" Content="@" Margin="670,1419,0,0" RenderTransformOrigin="-1.048,-0.5" Height="61" Width="82" Click="BtnAt_Click" FontFamily="League Spartan" FontWeight="Bold" VerticalAlignment="Top" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="18"/>
+            <Button Style="{StaticResource ButtonStyle1}" Name="BtnBack" Content="←" Margin="760,1419,0,0" RenderTransformOrigin="-1.048,-0.5" Height="61" Width="171" Click="BtnBack_Click" FontFamily="League Spartan" FontWeight="Bold" VerticalAlignment="Top" Background="#FFB21117" Foreground="White" CornerRadius="5,0,5,0" FontSize="45"/>
+            <TextBox Name="correoText" BorderThickness="0" Visibility="Collapsed" TextChanging="TextBox_OnTextChanging" IsReadOnly="True" HorizontalAlignment="Left" Height="71" Margin="103,917,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="510" FontSize="30" TextAlignment="Center" FontFamily="League Spartan" FontWeight="Bold" />
+            <Button Name="btnEnviar" Visibility="Collapsed" Content="ENVIAR" Height="118" Margin="676,898,0,0" Width="272" Opacity="0" Background="ForestGreen" Foreground="White" FontFamily="League Spartan" FontWeight="Bold" CornerRadius="5,0,5,0" Click="validarEmail" IsEnabled="False" VerticalAlignment="Top"/>
+            <Button Name="btnCancelar" Visibility="Collapsed" Content="CANCELAR" Height="122" Margin="383,1602,0,0" VerticalAlignment="Top" Width="295" Opacity="0" Background="Green" Foreground="White" FontFamily="League Spartan" FontWeight="Bold" Click="cancelar"/>
+        </Grid>
     </Grid>
 </Page>
 
