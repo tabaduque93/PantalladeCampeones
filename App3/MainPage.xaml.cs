@@ -1,23 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using System.Net;
 using System.Net.Mail;
-using System.Net.Mime;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using Windows.UI.Xaml.Media.Imaging;
+using System.Net;
+using System.Net.Mime;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
 
@@ -30,8 +21,9 @@ namespace App3
     {
         public MainPage()
         {
-            this.InitializeComponent();
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
+            this.InitializeComponent();
+
             Fondo.Visibility = Visibility.Visible;
             Fondo.Play();
         }
@@ -40,7 +32,6 @@ namespace App3
         {
 
             sonarAudio("clic");
-
             Fondo2.Visibility = Visibility.Visible;
             Fondo.Source = new Uri(this.BaseUri, "/Assets/Loop_VerJugadoresSombra.mp4");
             Fondo.Visibility = Visibility.Collapsed;
@@ -167,7 +158,7 @@ namespace App3
                     break;
             }
         }
-        void capturar(object sender, RoutedEventArgs e)
+        async void capturar(object sender, RoutedEventArgs e)
         {
             sonarAudio("clic");
             String videoJugador = Fondo.Source.ToString();
@@ -183,37 +174,61 @@ namespace App3
             switch (videoJugador)
             {
                 case "Teo_LoopLong.mp4":
+                    escribirJugadorTxt("PLAYER 1");
                     FondoTeo.Visibility = Visibility.Collapsed;
                     break;
 
                 case "Borja_Loop.mp4":
+                    escribirJugadorTxt("PLAYER 2");
                     FondoMiguel.Visibility = Visibility.Collapsed;
                     break;
 
                 case "Piedrahita_Loop.mp4":
+                    escribirJugadorTxt("PLAYER 3");
                     FondoMarlon.Visibility = Visibility.Collapsed;
                     break;
 
                 case "Hinestroza_Loop.mp4":
+                    escribirJugadorTxt("PLAYER 4");
                     FondoFredy.Visibility = Visibility.Collapsed;
                     break;
 
                 case "Viera_Loop.mp4":
+                    escribirJugadorTxt("PLAYER 5");
                     FondoSebastian.Visibility = Visibility.Collapsed;
                     break;
 
                 case "Moreno_Loop.mp4":
+                    escribirJugadorTxt("PLAYER 6");
                     FondoDidier.Visibility = Visibility.Collapsed;
                     break;
 
                 case "LoopGrupo.mp4":
+                    escribirJugadorTxt("PLAYER 7");
                     FondoTodos.Visibility = Visibility.Collapsed;
                     break;
             }
 
+            ImgCargando.Visibility = Visibility.Visible;
+            var view = ApplicationView.GetForCurrentView();
+            view.ExitFullScreenMode();
+            await Task.Delay(10000);
+
+            //string usuario = "USER";
+            string usuario = "Sistra Dev BE";
+
+            string rutaFoto = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\foto.jpg";
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.UriSource = new Uri(rutaFoto);
+            ImgFoto.Source = bitmapImage;
+
+            await Task.Delay(10000);
+            view.TryEnterFullScreenMode();
+            ImgCargando.Visibility = Visibility.Collapsed;
             Fondo2.Source = new Uri(this.BaseUri, "/Assets/VerJugadoresSombras.mp4");
             ImgTeclado.Visibility = Visibility.Visible;
             gridTeclado.Visibility = Visibility.Visible;
+            ImgFoto.Visibility = Visibility.Visible;
             Fondo.Source = new Uri(this.BaseUri, "/Assets/Loop_Inicial.mp4");
             Fondo.IsLooping = true;
         }
@@ -316,14 +331,18 @@ namespace App3
             {
                 sonarAudio("clic");
                 ImgTeclado.Visibility = Visibility.Collapsed;
+                ImgFoto.Visibility = Visibility.Collapsed;
                 gridTeclado.Visibility = Visibility.Collapsed;
                 ImgEnviandoEmail.Visibility = Visibility.Visible;
-                await Task.Delay(1000); // Se pausa durante 1 segundos para mostrar la imagen de Enviando
+                await Task.Delay(2000); // Se pausa durante 1 segundos para mostrar la imagen de Enviando
 
                 // Credentials
-                String SMTP_USERNAME = "AKIAQJIZPMK43GHT3P4J";
-                String SMTP_PASSWORD = "BOFsSsxD2c0FyPMfjdyboWQCKqQwFQdzom9cq1khPXBy";
-                String HOST = "email-smtp.us-west-2.amazonaws.com";
+                //String SMTP_USERNAME = "AKIAQJIZPMK43GHT3P4J";
+                String SMTP_USERNAME = "22310d50970478";
+                //String SMTP_PASSWORD = "BOFsSsxD2c0FyPMfjdyboWQCKqQwFQdzom9cq1khPXBy";
+                String SMTP_PASSWORD = "ebacfda9c84a44";
+                //String HOST = "email-smtp.us-west-2.amazonaws.com";
+                String HOST = "smtp.mailtrap.io";
                 int PORT = 587;
 
                 // General Data
@@ -337,12 +356,15 @@ namespace App3
                 // Content Message
                 String BODY = "<h4>¡Gracias por visitarnos! Recuerda compartir tu experiencia con la Pantalla de Campeones utilizando nuestros hashtags.</h4>" + 
                     "<h3>#VamosJunior #FamiliaRojiblanca #PantallaDeCampeones</h3>";
-                /*String photo = "path photo";
+                //string usuario = "USER";
+                string usuario = "Sistra Dev BE";
+
+                String photo = @"C:\Users\" + usua + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\foto.jpg";
                 Attachment dataPhoto = new Attachment(photo, MediaTypeNames.Application.Octet);
                 ContentDisposition photoContent = dataPhoto.ContentDisposition;
                 photoContent.CreationDate = System.IO.File.GetCreationTime(photo);
                 photoContent.ModificationDate = System.IO.File.GetLastWriteTime(photo);
-                photoContent.ReadDate = System.IO.File.GetLastAccessTime(photo);*/
+                photoContent.ReadDate = System.IO.File.GetLastAccessTime(photo);
 
                 /*String video = "path video";
                 Attachment dataVideo = new Attachment(video, MediaTypeNames.Application.Octet);
@@ -356,7 +378,7 @@ namespace App3
                 message.IsBodyHtml = true;
                 message.From = new MailAddress(FROM, FROMNAME);
                 message.To.Add(new MailAddress(TO));
-                //message.Attachments.Add(dataPhoto);
+                message.Attachments.Add(dataPhoto);
                 //message.Attachments.Add(dataVideo);
                 message.Subject = SUBJECT;
                 message.Body = BODY;
@@ -372,17 +394,15 @@ namespace App3
                     // Try to send the message. Show status in console.
                     try
                     {
-                        Console.WriteLine("Sending...");
                         client.Send(message);
-                        Console.WriteLine("Email sent!");
+                        Debug.WriteLine("======= Email sent! ========");
                         sonarAudio("enviado");
                         ImgEmailEnviado.Visibility = Visibility.Visible;
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("The email was not sent.");
-                        Console.WriteLine("Error message: " + ex.Message);
-                        sonarAudio("error");
+                        Debug.WriteLine("======= The email was not sent. ========");
+                        Debug.WriteLine("Error message: " + ex.Message);
                         ImgErrorEmail.Visibility = Visibility.Visible;
                     }
                 }
@@ -390,6 +410,7 @@ namespace App3
                 Fondo.Source = new Uri(this.BaseUri, "/Assets/Loop_Inicial.mp4");
                 Fondo.IsLooping = true;
                 await Task.Delay(5000);
+                ImgEnviandoEmail.Visibility = Visibility.Collapsed;
                 ImgEmailEnviado.Visibility = Visibility.Collapsed;
                 ImgErrorEmail.Visibility = Visibility.Collapsed;
                 Fondo.Visibility = Visibility.Visible;
@@ -403,6 +424,7 @@ namespace App3
         {
             sonarAudio("clic");
             ImgTeclado.Visibility = Visibility.Collapsed;
+            ImgFoto.Visibility = Visibility.Collapsed;
             gridTeclado.Visibility = Visibility.Collapsed;
             btnEnviar.Visibility = Visibility.Collapsed;
             btnCancelar.Visibility = Visibility.Collapsed;
@@ -459,6 +481,26 @@ namespace App3
             return valido;
         }
 
+
+        async void escribirJugadorTxt(string jugadorSeleccionado)
+        {
+            try
+            {
+                Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                Windows.Storage.StorageFile file = await storageFolder.CreateFileAsync("jugadorSeleccionado.txt",
+                        Windows.Storage.CreationCollisionOption.OpenIfExists);
+
+                await Windows.Storage.FileIO.WriteTextAsync(file, jugadorSeleccionado);
+
+                Debug.WriteLine("===== RUTA ARCHIVO =======");
+                Debug.WriteLine(file.Path);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("===== ERROR ARCHIVO =======");
+                Debug.WriteLine(e.ToString());
+            }
+        }
         /****** Métodos para el funcionamiento del teclado ******/
         private void Btn1_Click(object sender, RoutedEventArgs e)
         {

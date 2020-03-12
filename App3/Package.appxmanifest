@@ -32,10 +32,10 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="App3.App">
       <uap:VisualElements
-        DisplayName="App3"
+        DisplayName="Ventana de Campeones"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="App3"
+        Description="App UWP Ventada de Campeones"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />

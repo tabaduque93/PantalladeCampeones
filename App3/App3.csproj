@@ -23,7 +23,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <PackageCertificateThumbprint>0E22792B0F99EFA100B86FF5ED4D5BAD96D3B0B7</PackageCertificateThumbprint>
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
@@ -143,6 +143,7 @@
     <Content Include="Assets\Borja_Seleccion.mp4" />
     <Content Include="Assets\click.mp3" />
     <Content Include="Assets\error.png" />
+    <Content Include="Assets\loading.jpg" />
     <Content Include="Assets\second.mp3" />
     <Content Include="Assets\sent.mp3" />
     <Content Include="Assets\shoot.mp3" />
@@ -163,7 +164,7 @@
     <Content Include="Assets\Teo_LoopLong.mp4" />
     <Content Include="Assets\Teo_seleccion.mp4" />
     <Content Include="Assets\VerJugadoresSombras.mp4" />
-    <Content Include="Assets\ver_Grupo.mp4" />
+    <Content Include="Assets\Ver_Grupo.mp4" />
     <Content Include="Assets\Viera_Loop.mp4" />
     <Content Include="Assets\Viera_Seleccion.mp4" />
     <Content Include="Assets\Volver_Individual.mp4" />
