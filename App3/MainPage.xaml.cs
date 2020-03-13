@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Threading.Tasks;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using Windows.UI.Xaml.Media.Imaging;
-using System.Net;
-using System.Net.Mime;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
 
@@ -21,14 +22,27 @@ namespace App3
     {
         public MainPage()
         {
+            //Iniciar la app en modo Full Screen
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
+
+            //Colocar transparente la barra de titulo del programa
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ForegroundColor = Windows.UI.Colors.Transparent;
+            titleBar.BackgroundColor = Windows.UI.Colors.Transparent;
+            titleBar.ButtonForegroundColor = Windows.UI.Colors.Transparent;
+            titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
+            titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.Transparent;
+            titleBar.ButtonHoverBackgroundColor = Windows.UI.Colors.Transparent;
+            titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.Transparent;
+            titleBar.ButtonPressedBackgroundColor = Windows.UI.Colors.Transparent;
+
             this.InitializeComponent();
 
             Fondo.Visibility = Visibility.Visible;
             Fondo.Play();
         }
 
-         private void verJugadores(object sender, RoutedEventArgs e)
+        private void verJugadores(object sender, RoutedEventArgs e)
         {
 
             sonarAudio("clic");
@@ -55,7 +69,7 @@ namespace App3
         {
             Fondo.Visibility = Visibility.Visible;
             Fondo2.Visibility = Visibility.Collapsed;
-            
+
             Fondo.IsLooping = true;
             Fondo.Play();
 
@@ -105,7 +119,7 @@ namespace App3
             Fondo.Visibility = Visibility.Visible;
             Fondo.IsLooping = true;
             Fondo.Play();
-            btnCapturar.Margin = new Thickness(310, 1100, 0 ,0);
+            btnCapturar.Margin = new Thickness(310, 1100, 0, 0);
             btnCapturar.Visibility = Visibility.Visible;
             btnIndividual.Visibility = Visibility.Visible;
         }
@@ -116,7 +130,7 @@ namespace App3
             btnCapturar.Visibility = Visibility.Collapsed;
 
             Button boton = sender as Button;
-            
+
             switch (boton.Name)
             {
                 case "btnTeofilo":
@@ -161,6 +175,13 @@ namespace App3
         async void capturar(object sender, RoutedEventArgs e)
         {
             sonarAudio("clic");
+
+            MediaElement sonido = new MediaElement();
+            Windows.Storage.StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            Windows.Storage.StorageFile fileJunior = await folder.GetFileAsync("dalejunior.mp3");
+            var streamJunior = await fileJunior.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            sonido.SetSource(streamJunior, fileJunior.ContentType);
+
             String videoJugador = Fondo.Source.ToString();
             videoJugador = videoJugador.Split("Assets/").Last();
 
@@ -212,17 +233,19 @@ namespace App3
             ImgCargando.Visibility = Visibility.Visible;
             var view = ApplicationView.GetForCurrentView();
             view.ExitFullScreenMode();
-            await Task.Delay(10000);
 
-            //string usuario = "USER";
-            string usuario = "Sistra Dev BE";
+            while (!finCaptura())
+            {
+                await Task.Delay(1000);
+            }
+            string usuario = "USER";
+            //string usuario = "Sistra Dev BE";
 
-            string rutaFoto = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\foto.jpg";
+            string rutaFoto = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.UriSource = new Uri(rutaFoto);
             ImgFoto.Source = bitmapImage;
 
-            await Task.Delay(10000);
             view.TryEnterFullScreenMode();
             ImgCargando.Visibility = Visibility.Collapsed;
             Fondo2.Source = new Uri(this.BaseUri, "/Assets/VerJugadoresSombras.mp4");
@@ -231,6 +254,7 @@ namespace App3
             ImgFoto.Visibility = Visibility.Visible;
             Fondo.Source = new Uri(this.BaseUri, "/Assets/Loop_Inicial.mp4");
             Fondo.IsLooping = true;
+            sonido.Stop();
         }
 
         void habilitarBtnJugadores(String jugador)
@@ -354,12 +378,12 @@ namespace App3
                 String TO = email;
 
                 // Content Message
-                String BODY = "<h4>¡Gracias por visitarnos! Recuerda compartir tu experiencia con la Pantalla de Campeones utilizando nuestros hashtags.</h4>" + 
+                String BODY = "<h4>¡Gracias por visitarnos! Recuerda compartir tu experiencia con la Pantalla de Campeones utilizando nuestros hashtags.</h4>" +
                     "<h3>#VamosJunior #FamiliaRojiblanca #PantallaDeCampeones</h3>";
-                //string usuario = "USER";
-                string usuario = "Sistra Dev BE";
+                string usuario = "USER";
+                // string usuario = "Sistra Dev BE";
 
-                String photo = @"C:\Users\" + usua + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\foto.jpg";
+                String photo = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
                 Attachment dataPhoto = new Attachment(photo, MediaTypeNames.Application.Octet);
                 ContentDisposition photoContent = dataPhoto.ContentDisposition;
                 photoContent.CreationDate = System.IO.File.GetCreationTime(photo);
@@ -373,7 +397,7 @@ namespace App3
                 videoContent.ModificationDate = System.IO.File.GetLastWriteTime(video);
                 videoContent.ReadDate = System.IO.File.GetLastAccessTime(video);*/
 
-               // Create Messaje Object
+                // Create Messaje Object
                 MailMessage message = new MailMessage();
                 message.IsBodyHtml = true;
                 message.From = new MailAddress(FROM, FROMNAME);
@@ -390,7 +414,7 @@ namespace App3
 
                     client.EnableSsl = true;
                     ImgEnviandoEmail.Visibility = Visibility.Collapsed;
-                    
+
                     // Try to send the message. Show status in console.
                     try
                     {
@@ -420,7 +444,7 @@ namespace App3
             }
         }
 
-        private void cancelar( object sender, RoutedEventArgs e)
+        private void cancelar(object sender, RoutedEventArgs e)
         {
             sonarAudio("clic");
             ImgTeclado.Visibility = Visibility.Collapsed;
@@ -442,6 +466,11 @@ namespace App3
 
             switch (audio)
             {
+                case "stopJunior":
+                    Windows.Storage.StorageFile fileStop = await folder.GetFileAsync("dalejunior.mp3");
+                    var streamStop = await fileStop.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                    sonido.Stop();
+                    break;
                 case "enviado":
                     Windows.Storage.StorageFile fileEnviado = await folder.GetFileAsync("sent.mp3");
                     var streamEnviado = await fileEnviado.OpenAsync(Windows.Storage.FileAccessMode.Read);
@@ -501,6 +530,28 @@ namespace App3
                 Debug.WriteLine(e.ToString());
             }
         }
+
+        bool finCaptura()
+        {
+            bool fin = false;
+            string rutaArchivo = @"C:\Users\USER\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\jugadorSeleccionado.txt";
+
+            if (File.Exists(rutaArchivo))
+            {
+
+                string text = System.IO.File.ReadAllText(rutaArchivo);
+                text = text.Trim();
+
+                if (text.Equals("FIN"))
+                {
+                    fin = true;
+                    escribirJugadorTxt("");
+                }
+            }
+
+            return fin;
+        }
+
         /****** Métodos para el funcionamiento del teclado ******/
         private void Btn1_Click(object sender, RoutedEventArgs e)
         {

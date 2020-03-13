@@ -96,7 +96,7 @@
         <MediaElement Name="FondoDidier" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
         <MediaElement Name="FondoTodos" AutoPlay="False" IsLooping="False" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080"/>
         <Image Name="ImgTeclado" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080" Source="/Assets/teclado.png"></Image>
-        <Image Name="ImgFoto" Visibility="Collapsed" HorizontalAlignment="Center" Height="632" VerticalAlignment="Top" Width="644" Margin="0,165,0,0"/>
+        <Image Name="ImgFoto" Visibility="Collapsed" HorizontalAlignment="Center" Height="632" VerticalAlignment="Top" Width="388" Margin="0,165,0,0"/>
         <Image Name="ImgCargando" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080" Source="/Assets/loading.jpg"></Image>
         <Image Name="ImgEnviandoEmail" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080" Source="/Assets/sending.png"></Image>
         <Image Name="ImgErrorEmail" Visibility="Collapsed" HorizontalAlignment="Center" Height="1920" VerticalAlignment="Center" Width="1080" Source="/Assets/error.png"></Image>
@@ -114,7 +114,7 @@
         <Button Name="btnDidier" Content="Button" Margin="698,1225,0,0" VerticalAlignment="Top" Height="160" Width="261" Click="seleccionarJugador" Opacity="0" Background="Blue" Visibility="Collapsed"/>
 
         <!--Botón Todos-->
-        <Button Name="btnTodos" Content="Button" Margin="544,1445,0,0" VerticalAlignment="Top" Height="108" Width="497" Click="seleccionarJugador" Opacity="0" Background="Blue" Visibility="Collapsed"/>
+        <Button Name="btnTodos" Content="Button" Margin="70,1445,0,0" VerticalAlignment="Top" Height="232" Width="971" Click="seleccionarJugador" Opacity="0" Background="Blue" Visibility="Collapsed"/>
 
         <!--Botón Capturar-->
         <Button Name="btnCapturar" Content="Button" Margin="336,869,0,0" VerticalAlignment="Top" Height="91" Width="457" Click="capturar" Opacity="0" Background="Orange" Visibility="Collapsed"/>
