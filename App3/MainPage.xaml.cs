@@ -234,16 +234,22 @@ namespace App3
             var view = ApplicationView.GetForCurrentView();
             view.ExitFullScreenMode();
 
+            await Task.Delay(5000);
+
             while (!finCaptura())
             {
                 await Task.Delay(1000);
             }
+
+            sonido.Stop();
             string usuario = "USER";
             //string usuario = "Sistra Dev BE";
+
 
             string rutaFoto = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.UriSource = new Uri(rutaFoto);
+            bitmapImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             ImgFoto.Source = bitmapImage;
 
             view.TryEnterFullScreenMode();
@@ -362,11 +368,11 @@ namespace App3
 
                 // Credentials
                 //String SMTP_USERNAME = "AKIAQJIZPMK43GHT3P4J";
-                String SMTP_USERNAME = "22310d50970478";
+                String SMTP_USERNAME = "AKIASASQOR57CM2J2W4M";
                 //String SMTP_PASSWORD = "BOFsSsxD2c0FyPMfjdyboWQCKqQwFQdzom9cq1khPXBy";
-                String SMTP_PASSWORD = "ebacfda9c84a44";
-                //String HOST = "email-smtp.us-west-2.amazonaws.com";
-                String HOST = "smtp.mailtrap.io";
+                String SMTP_PASSWORD = "BE8AELg6H+16lI6mgXUmLKKwAo3040240j0gHhCKGcP8";
+                String HOST = "email-smtp.us-west-2.amazonaws.com";
+                // String HOST = "smtp.mailtrap.io";
                 int PORT = 587;
 
                 // General Data
@@ -381,8 +387,7 @@ namespace App3
                 String BODY = "<h4>¡Gracias por visitarnos! Recuerda compartir tu experiencia con la Pantalla de Campeones utilizando nuestros hashtags.</h4>" +
                     "<h3>#VamosJunior #FamiliaRojiblanca #PantallaDeCampeones</h3>";
                 string usuario = "USER";
-                // string usuario = "Sistra Dev BE";
-
+                //string usuario = "Sistra Dev BE";
                 String photo = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
                 Attachment dataPhoto = new Attachment(photo, MediaTypeNames.Application.Octet);
                 ContentDisposition photoContent = dataPhoto.ContentDisposition;
@@ -390,7 +395,7 @@ namespace App3
                 photoContent.ModificationDate = System.IO.File.GetLastWriteTime(photo);
                 photoContent.ReadDate = System.IO.File.GetLastAccessTime(photo);
 
-                /*String video = "path video";
+                /* String video = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\VIDEO.mp4";
                 Attachment dataVideo = new Attachment(video, MediaTypeNames.Application.Octet);
                 ContentDisposition videoContent = dataVideo.ContentDisposition;
                 videoContent.CreationDate = System.IO.File.GetCreationTime(video);
@@ -412,6 +417,7 @@ namespace App3
                     client.Credentials =
                         new NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD);
 
+                    client.Timeout = 60000;
                     client.EnableSsl = true;
                     ImgEnviandoEmail.Visibility = Visibility.Collapsed;
 
