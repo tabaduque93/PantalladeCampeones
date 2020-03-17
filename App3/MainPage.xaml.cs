@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,6 +19,16 @@ namespace App3
     /// <summary>
     /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
+    /// 
+    static class Datos
+    {
+        public static int idJugador = 0;
+        // public static string usuario = "Sistra Dev BE";
+        public static string usuario = "USER";
+        public static int idPantalla = 2; // 0 = Buenavista, 1 = Ventana Al Mundo, 2 = Ventana de Campeones
+
+    }
+
     public sealed partial class MainPage : Page
     {
         public MainPage()
@@ -25,16 +36,16 @@ namespace App3
             //Iniciar la app en modo Full Screen
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
 
-            //Colocar transparente la barra de titulo del programa
+            //Colocar Del mismo color la barra de titulo del programa que el fondo de la imagen Cargando
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            titleBar.ForegroundColor = Windows.UI.Colors.Transparent;
-            titleBar.BackgroundColor = Windows.UI.Colors.Transparent;
-            titleBar.ButtonForegroundColor = Windows.UI.Colors.Transparent;
-            titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
-            titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.Transparent;
-            titleBar.ButtonHoverBackgroundColor = Windows.UI.Colors.Transparent;
-            titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.Transparent;
-            titleBar.ButtonPressedBackgroundColor = Windows.UI.Colors.Transparent;
+            titleBar.ForegroundColor = ColorHelper.FromArgb(255, 49, 63, 126);
+            titleBar.BackgroundColor = ColorHelper.FromArgb(255, 49, 63, 126);
+            titleBar.ButtonForegroundColor = ColorHelper.FromArgb(255, 49, 63, 126);
+            titleBar.ButtonBackgroundColor = ColorHelper.FromArgb(255, 49, 63, 126);
+            titleBar.ButtonHoverForegroundColor = ColorHelper.FromArgb(255, 49, 63, 126);
+            titleBar.ButtonHoverBackgroundColor = ColorHelper.FromArgb(255, 49, 63, 126);
+            titleBar.ButtonPressedForegroundColor = ColorHelper.FromArgb(255, 49, 63, 126);
+            titleBar.ButtonPressedBackgroundColor = ColorHelper.FromArgb(255, 49, 63, 126);
 
             this.InitializeComponent();
 
@@ -44,7 +55,7 @@ namespace App3
 
         private void verJugadores(object sender, RoutedEventArgs e)
         {
-
+            Datos.idJugador = 0;
             sonarAudio("clic");
             Fondo2.Visibility = Visibility.Visible;
             Fondo.Source = new Uri(this.BaseUri, "/Assets/Loop_VerJugadoresSombra.mp4");
@@ -127,8 +138,8 @@ namespace App3
         void seleccionarJugador(object sender, RoutedEventArgs e)
         {
             sonarAudio("clic");
-            btnCapturar.Visibility = Visibility.Collapsed;
-
+            //btnCapturar.Visibility = Visibility.Collapsed;
+            btnCapturar.Visibility = Visibility.Visible;
             Button boton = sender as Button;
 
             switch (boton.Name)
@@ -197,36 +208,43 @@ namespace App3
                 case "Teo_LoopLong.mp4":
                     escribirJugadorTxt("PLAYER 1");
                     FondoTeo.Visibility = Visibility.Collapsed;
+                    Datos.idJugador = 6;
                     break;
 
                 case "Borja_Loop.mp4":
                     escribirJugadorTxt("PLAYER 2");
                     FondoMiguel.Visibility = Visibility.Collapsed;
+                    Datos.idJugador = 4;
                     break;
 
                 case "Piedrahita_Loop.mp4":
                     escribirJugadorTxt("PLAYER 3");
                     FondoMarlon.Visibility = Visibility.Collapsed;
+                    Datos.idJugador = 3;
                     break;
 
                 case "Hinestroza_Loop.mp4":
                     escribirJugadorTxt("PLAYER 4");
                     FondoFredy.Visibility = Visibility.Collapsed;
+                    Datos.idJugador = 7;
                     break;
 
                 case "Viera_Loop.mp4":
                     escribirJugadorTxt("PLAYER 5");
                     FondoSebastian.Visibility = Visibility.Collapsed;
+                    Datos.idJugador = 2;
                     break;
 
                 case "Moreno_Loop.mp4":
                     escribirJugadorTxt("PLAYER 6");
                     FondoDidier.Visibility = Visibility.Collapsed;
+                    Datos.idJugador = 5;
                     break;
 
                 case "LoopGrupo.mp4":
                     escribirJugadorTxt("PLAYER 7");
                     FondoTodos.Visibility = Visibility.Collapsed;
+                    Datos.idJugador = 1;
                     break;
             }
 
@@ -242,11 +260,8 @@ namespace App3
             }
 
             sonido.Stop();
-            string usuario = "USER";
-            //string usuario = "Sistra Dev BE";
 
-
-            string rutaFoto = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
+            string rutaFoto = @"C:\Users\" + Datos.usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.UriSource = new Uri(rutaFoto);
             bitmapImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -350,7 +365,7 @@ namespace App3
             Fondo.Visibility = Visibility.Visible;
             Fondo.IsLooping = true;
             Fondo.Play();
-            btnCapturar.Visibility = Visibility.Visible;
+            // btnCapturar.Visibility = Visibility.Visible;
         }
 
         private async void validarEmail(object sender, RoutedEventArgs e)
@@ -359,6 +374,7 @@ namespace App3
 
             if (emailValido(email))
             {
+
                 sonarAudio("clic");
                 ImgTeclado.Visibility = Visibility.Collapsed;
                 ImgFoto.Visibility = Visibility.Collapsed;
@@ -366,13 +382,15 @@ namespace App3
                 ImgEnviandoEmail.Visibility = Visibility.Visible;
                 await Task.Delay(2000); // Se pausa durante 1 segundos para mostrar la imagen de Enviando
 
-                // Credentials
-                //String SMTP_USERNAME = "AKIAQJIZPMK43GHT3P4J";
-                String SMTP_USERNAME = "AKIASASQOR57CM2J2W4M";
-                //String SMTP_PASSWORD = "BOFsSsxD2c0FyPMfjdyboWQCKqQwFQdzom9cq1khPXBy";
-                String SMTP_PASSWORD = "BE8AELg6H+16lI6mgXUmLKKwAo3040240j0gHhCKGcP8";
+                // Credenciales Amazon
+                String SMTP_USERNAME = "AKIAQJIZPMK43GHT3P4J";
+                String SMTP_PASSWORD = "BOFsSsxD2c0FyPMfjdyboWQCKqQwFQdzom9cq1khPXBy";
+                
+                // Credenciales de reserva Amazon
+                // String SMTP_USERNAME = "AKIASASQOR57CM2J2W4M";
+                // String SMTP_PASSWORD = "BE8AELg6H+16lI6mgXUmLKKwAo3040240j0gHhCKGcP8";
+          
                 String HOST = "email-smtp.us-west-2.amazonaws.com";
-                // String HOST = "smtp.mailtrap.io";
                 int PORT = 587;
 
                 // General Data
@@ -386,9 +404,7 @@ namespace App3
                 // Content Message
                 String BODY = "<h4>¡Gracias por visitarnos! Recuerda compartir tu experiencia con la Pantalla de Campeones utilizando nuestros hashtags.</h4>" +
                     "<h3>#VamosJunior #FamiliaRojiblanca #PantallaDeCampeones</h3>";
-                string usuario = "USER";
-                //string usuario = "Sistra Dev BE";
-                String photo = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
+                String photo = @"C:\Users\" + Datos.usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
                 Attachment dataPhoto = new Attachment(photo, MediaTypeNames.Application.Octet);
                 ContentDisposition photoContent = dataPhoto.ContentDisposition;
                 photoContent.CreationDate = System.IO.File.GetCreationTime(photo);
@@ -428,6 +444,10 @@ namespace App3
                         Debug.WriteLine("======= Email sent! ========");
                         sonarAudio("enviado");
                         ImgEmailEnviado.Visibility = Visibility.Visible;
+                       
+                        // Hacer el registro en el WS de la BD
+                        ServiceReference1.HistoricoPantallaSoapClient servicio = new ServiceReference1.HistoricoPantallaSoapClient();
+                        servicio.InsertarHistoricoAsync(Datos.idPantalla, Datos.idJugador, email, "", "");
                     }
                     catch (Exception ex)
                     {
@@ -540,7 +560,7 @@ namespace App3
         bool finCaptura()
         {
             bool fin = false;
-            string rutaArchivo = @"C:\Users\USER\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\jugadorSeleccionado.txt";
+            string rutaArchivo = @"C:\Users\" + Datos.usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\jugadorSeleccionado.txt";
 
             if (File.Exists(rutaArchivo))
             {

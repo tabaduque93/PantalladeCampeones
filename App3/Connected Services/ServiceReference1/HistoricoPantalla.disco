@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://awserver1.sistra.com.co/wspantallajunior/HistoricoPantalla.asmx?wsdl" docRef="http://awserver1.sistra.com.co/wspantallajunior/HistoricoPantalla.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://awserver1.sistra.com.co/wspantallajunior/HistoricoPantalla.asmx" xmlns:q1="http://tempuri.org/" binding="q1:HistoricoPantallaSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://awserver1.sistra.com.co/wspantallajunior/HistoricoPantalla.asmx" xmlns:q2="http://tempuri.org/" binding="q2:HistoricoPantallaSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>
