@@ -25,7 +25,8 @@ namespace App3
         public static int idJugador = 0;
         // public static string usuario = "Sistra Dev BE";
         public static string usuario = "USER";
-        public static int idPantalla = 2; // 0 = Buenavista, 1 = Ventana Al Mundo, 2 = Ventana de Campeones
+        public static int idPantalla = 2; // 0 = Buenavista, 1 = Ventana de Campeones, 2 = Ventana al Mundo
+        public static string rutaAssets = @"C:\Users\" + Datos.usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\";
 
     }
 
@@ -261,7 +262,7 @@ namespace App3
 
             sonido.Stop();
 
-            string rutaFoto = @"C:\Users\" + Datos.usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
+            string rutaFoto = Datos.rutaAssets + "FOTO.png";
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.UriSource = new Uri(rutaFoto);
             bitmapImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -374,13 +375,12 @@ namespace App3
 
             if (emailValido(email))
             {
-
                 sonarAudio("clic");
                 ImgTeclado.Visibility = Visibility.Collapsed;
                 ImgFoto.Visibility = Visibility.Collapsed;
                 gridTeclado.Visibility = Visibility.Collapsed;
                 ImgEnviandoEmail.Visibility = Visibility.Visible;
-                await Task.Delay(2000); // Se pausa durante 1 segundos para mostrar la imagen de Enviando
+                await Task.Delay(2000); // Se pausa durante 2 segundos para mostrar la imagen de Enviando
 
                 // Credenciales Amazon
                 String SMTP_USERNAME = "AKIAQJIZPMK43GHT3P4J";
@@ -404,57 +404,74 @@ namespace App3
                 // Content Message
                 String BODY = "<h4>¡Gracias por visitarnos! Recuerda compartir tu experiencia con la Pantalla de Campeones utilizando nuestros hashtags.</h4>" +
                     "<h3>#VamosJunior #FamiliaRojiblanca #PantallaDeCampeones</h3>";
-                String photo = @"C:\Users\" + Datos.usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\FOTO.png";
-                Attachment dataPhoto = new Attachment(photo, MediaTypeNames.Application.Octet);
-                ContentDisposition photoContent = dataPhoto.ContentDisposition;
-                photoContent.CreationDate = System.IO.File.GetCreationTime(photo);
-                photoContent.ModificationDate = System.IO.File.GetLastWriteTime(photo);
-                photoContent.ReadDate = System.IO.File.GetLastAccessTime(photo);
+                String photo = Datos.rutaAssets + "FOTO.png";
 
-                /* String video = @"C:\Users\" + usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\VIDEO.mp4";
-                Attachment dataVideo = new Attachment(video, MediaTypeNames.Application.Octet);
-                ContentDisposition videoContent = dataVideo.ContentDisposition;
-                videoContent.CreationDate = System.IO.File.GetCreationTime(video);
-                videoContent.ModificationDate = System.IO.File.GetLastWriteTime(video);
-                videoContent.ReadDate = System.IO.File.GetLastAccessTime(video);*/
+                String video = Datos.rutaAssets + "VIDEO_GENERADO.mp4";
 
-                // Create Messaje Object
-                MailMessage message = new MailMessage();
-                message.IsBodyHtml = true;
-                message.From = new MailAddress(FROM, FROMNAME);
-                message.To.Add(new MailAddress(TO));
-                message.Attachments.Add(dataPhoto);
-                //message.Attachments.Add(dataVideo);
-                message.Subject = SUBJECT;
-                message.Body = BODY;
-
-                using (var client = new System.Net.Mail.SmtpClient(HOST, PORT))
+                if (File.Exists(photo) && File.Exists(video))
                 {
-                    client.Credentials =
-                        new NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD);
+                    // Adjuntar foto
+                    Attachment dataPhoto = new Attachment(photo, MediaTypeNames.Application.Octet);
+                    ContentDisposition photoContent = dataPhoto.ContentDisposition;
+                    photoContent.CreationDate = System.IO.File.GetCreationTime(photo);
+                    photoContent.ModificationDate = System.IO.File.GetLastWriteTime(photo);
+                    photoContent.ReadDate = System.IO.File.GetLastAccessTime(photo);
 
-                    client.Timeout = 60000;
-                    client.EnableSsl = true;
+                    // Adjuntar video
+                    Attachment dataVideo = new Attachment(video, MediaTypeNames.Application.Octet);
+                    ContentDisposition videoContent = dataVideo.ContentDisposition;
+                    videoContent.CreationDate = System.IO.File.GetCreationTime(video);
+                    videoContent.ModificationDate = System.IO.File.GetLastWriteTime(video);
+                    videoContent.ReadDate = System.IO.File.GetLastAccessTime(video);
+
+                    // Create Messaje Object
+                    MailMessage message = new MailMessage();
+                    message.IsBodyHtml = true;
+                    message.From = new MailAddress(FROM, FROMNAME);
+                    message.To.Add(new MailAddress(TO));
+                    message.Attachments.Add(dataPhoto);
+                    message.Attachments.Add(dataVideo);
+                    message.Subject = SUBJECT;
+                    message.Body = BODY;
+
+                    using (var client = new System.Net.Mail.SmtpClient(HOST, PORT))
+                    {
+                        client.Credentials =
+                            new NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD);
+
+                        client.Timeout = 60000;
+                        client.EnableSsl = true;
+                        ImgEnviandoEmail.Visibility = Visibility.Collapsed;
+
+                        // Try to send the message. Show status in console.
+                        try
+                        {
+                            client.Send(message);
+                            Debug.WriteLine("======= Email sent! ========");
+                            sonarAudio("enviado");
+                            ImgEmailEnviado.Visibility = Visibility.Visible;
+
+                            // Hacer el registro en el WS de la BD
+                            ServiceReference1.HistoricoPantallaSoapClient servicio = new ServiceReference1.HistoricoPantallaSoapClient();
+                            servicio.InsertarHistoricoAsync(Datos.idPantalla, Datos.idJugador, email, "", "");
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine("======= The email was not sent. ========");
+                            Debug.WriteLine("Error message: " + ex.Message);
+                            ImgErrorEmail.Visibility = Visibility.Visible;
+                        }
+                    }
+
+                    dataPhoto.Dispose();
+                    dataVideo.Dispose();
+                    File.Delete(photo);
+                    File.Delete(video);
+                }
+                else
+                {
                     ImgEnviandoEmail.Visibility = Visibility.Collapsed;
-
-                    // Try to send the message. Show status in console.
-                    try
-                    {
-                        client.Send(message);
-                        Debug.WriteLine("======= Email sent! ========");
-                        sonarAudio("enviado");
-                        ImgEmailEnviado.Visibility = Visibility.Visible;
-                       
-                        // Hacer el registro en el WS de la BD
-                        ServiceReference1.HistoricoPantallaSoapClient servicio = new ServiceReference1.HistoricoPantallaSoapClient();
-                        servicio.InsertarHistoricoAsync(Datos.idPantalla, Datos.idJugador, email, "", "");
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine("======= The email was not sent. ========");
-                        Debug.WriteLine("Error message: " + ex.Message);
-                        ImgErrorEmail.Visibility = Visibility.Visible;
-                    }
+                    ImgErrorEmail.Visibility = Visibility.Visible;
                 }
 
                 Fondo.Source = new Uri(this.BaseUri, "/Assets/Loop_Inicial.mp4");
@@ -483,6 +500,14 @@ namespace App3
             btnVoyPaEsa.Visibility = Visibility.Visible;
             Fondo.Visibility = Visibility.Visible;
             Fondo.Play();
+
+            String photo = Datos.rutaAssets + "FOTO.png";
+            String video = Datos.rutaAssets + "VIDEO.mp4";
+            String videoGenerado = Datos.rutaAssets + "VIDEO_GENERADO.mp4";
+
+            File.Delete(photo);
+            File.Delete(video);
+            File.Delete(videoGenerado);
         }
 
         private async void sonarAudio(String audio)
@@ -561,6 +586,7 @@ namespace App3
         {
             bool fin = false;
             string rutaArchivo = @"C:\Users\" + Datos.usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\jugadorSeleccionado.txt";
+            string rutaVideoGenerado = @"C:\Users\" + Datos.usuario + @"\AppData\Local\Packages\9e44d609-57f4-47ef-8e9f-5d0b19eccf1e_6yj39zyq0cs5j\LocalState\Fotos\VIDEO_GENERADO.mp4";
 
             if (File.Exists(rutaArchivo))
             {
@@ -568,7 +594,7 @@ namespace App3
                 string text = System.IO.File.ReadAllText(rutaArchivo);
                 text = text.Trim();
 
-                if (text.Equals("FIN"))
+                if (text.Equals("FIN") && File.Exists(rutaVideoGenerado))
                 {
                     fin = true;
                     escribirJugadorTxt("");
