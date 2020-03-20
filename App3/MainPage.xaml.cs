@@ -192,6 +192,7 @@ namespace App3
             Windows.Storage.StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
             Windows.Storage.StorageFile fileJunior = await folder.GetFileAsync("dalejunior.mp3");
             var streamJunior = await fileJunior.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            sonido.Volume = 0.10;
             sonido.SetSource(streamJunior, fileJunior.ContentType);
 
             String videoJugador = Fondo.Source.ToString();
@@ -500,14 +501,6 @@ namespace App3
             btnVoyPaEsa.Visibility = Visibility.Visible;
             Fondo.Visibility = Visibility.Visible;
             Fondo.Play();
-
-            String photo = Datos.rutaAssets + "FOTO.png";
-            String video = Datos.rutaAssets + "VIDEO.mp4";
-            String videoGenerado = Datos.rutaAssets + "VIDEO_GENERADO.mp4";
-
-            File.Delete(photo);
-            File.Delete(video);
-            File.Delete(videoGenerado);
         }
 
         private async void sonarAudio(String audio)
